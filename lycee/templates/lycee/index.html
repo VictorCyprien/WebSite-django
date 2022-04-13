@@ -1,0 +1,9 @@
+{% if liste %}
+  <ul>
+      {%for cursus in liste%}
+      <li><a href='lycee/{{cursus.id}}'>{{cursus.name}}</a></li>
+      {% endfor %}
+  </ul>
+{% else %}
+  <p>No cursus to show.</p>
+{%endif %}
