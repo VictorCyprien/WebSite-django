@@ -1,0 +1,3 @@
+mysite/__pycache__/*.pyc
+lycee/__pycache__/*.pyc
+lycee/migrations
