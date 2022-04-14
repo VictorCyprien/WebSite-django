@@ -2,22 +2,27 @@
 
 {% if liste %}
   {% block title %}
-  List of programs
+  List of cursus
   {% endblock %}
 
   {% block content %}
    <div class="container">
      {% for cursus in liste %}
       <div class="row">
-        <div class="col-sm-2">
-          <a href="lycee/{{cursus.id}}">{{cursus.name}}</a>
+        <div class="col-sm-12">
+          <a href="./{{cursus.id}}">{{cursus.name}}</a>
+          <button>
+            <a href="./cursuscall/{{cursus.id}}">Call of roll</a>
+          </button>
         </div>
       </div>
     {% endfor %}
      <div class="container">
        <div class="container">
         <div class="row">
+          <button>Particular Call of roll</button>
           </div>
+        <button>Create a student</button>
         </div>
        </div>
      </div>

@@ -1,0 +1,26 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% if liste %}
+  {% block title %}
+    Detail of a presence
+  {% endblock %}
+
+  {% block content %}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>{{liste.reason}}</h3>
+          <li>{{liste.isMissing}}</li>
+          <li>{{liste.date}}</li>
+          <li>{{liste.student}}</li>
+          <li>{{liste.start_time}}</li>
+          <li>{{liste.end_time}}</li>
+          <button>Edit Presence data</button>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+{% else %}
+  <p>No student to show.</p>
+{% endif %}

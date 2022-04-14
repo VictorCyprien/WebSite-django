@@ -1,0 +1,22 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% if liste %}
+  {% block title %}
+    Detail of a cursus
+  {% endblock %}
+
+  {% block content %}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          {% for eleve in liste%}
+          <li><a href="/lycee/student/{{eleve.id}}">{{eleve}}</a></li>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+{% else %}
+  <p>No student to show.</p>
+{% endif %}

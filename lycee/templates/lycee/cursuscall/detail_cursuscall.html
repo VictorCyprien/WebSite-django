@@ -1,0 +1,33 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% if liste %}
+  {% block title %}
+    Detail of a cursus call
+  {% endblock %}
+
+  {% block content %}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+            <form method="POST">
+                <label for="date">Start date:</label>
+                <input type="date" id="date" name="date_cursuscall"
+                    value="2022-04-14"
+                    min="2021-09-01" max="2022-08-31">
+                <br>
+                {% for eleve in liste%}
+                <input type="checkbox" id="{{eleve.id}}" name="{{eleve.last_name}}">
+                <label for="{{eleve.id}}"></label>
+                {{eleve}}
+                <br>
+                {% endfor %}
+                <submit type="button" value="cursuscall_check"></submit>
+            </form>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+{% else %}
+  <p>No student to show.</p>
+{% endif %}
