@@ -1,0 +1,24 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% if liste %}
+  {% block title %}
+    Detail of a student
+  {% endblock %}
+
+  {% block content %}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-2">
+          <h3>{{liste.first_name}}{{liste.last_name}}</h3>
+          <li>{{liste.birth_date}}</li>
+          <li>{{liste.phone}}</li>
+          <li>{{liste.email|lower}}</li>
+          <li>{{liste.cursus}}</li>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+{% else %}
+  <p>No student to show.</p>
+{% endif %}
