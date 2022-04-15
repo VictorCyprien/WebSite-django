@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from lycee import views
-from lycee.views import PresenceCreateView, StudentCreateView
+from lycee.views import CursusCallView, PresenceCreateView, StudentCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,6 +24,7 @@ urlpatterns = [
     path('lycee/<int:cursus_id>', views.detail_grade, name='detail_grade'),
     path('lycee/student/<int:student_id>', views.detail_student, name='detail_student'),
     path('lycee/student/create', StudentCreateView.as_view(), name='create_student'),
+    path('lycee/student/update/<int:student_id>', views.update_student, name='update_student'),
     path('lycee/cursuscall/<int:cursus_id>', views.cursus_call, name='cursus_call'),
     path('lycee/presence/', views.detail_all_presence, name='detail_all_presence'),
     path('lycee/presence/create', PresenceCreateView.as_view(), name='create_presence'),

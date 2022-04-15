@@ -1,3 +1,4 @@
+from django import forms
 from django.forms.models import ModelForm
 from .models import Student, Presence
 
@@ -32,3 +33,11 @@ class PresenceForm(ModelForm):
             'start_time',
             'end_time',
         )
+
+
+class CursusCallForm(forms.Form):
+    date = forms.DateInput()
+    
+    choices = forms.MultipleChoiceField(
+        widget  = forms.CheckboxSelectMultiple,
+    )

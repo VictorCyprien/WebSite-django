@@ -1,11 +1,11 @@
 from audioop import reverse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 # Create your views here.
 
 from django.http import HttpResponse
 from .models import Cursus, Student, Presence
-from .forms import StudentForm, PresenceForm
+from .forms import CursusCallForm, StudentForm, PresenceForm
 from django.template import loader
 from django.views.generic.edit import CreateView
 from django.urls import reverse
@@ -20,6 +20,10 @@ class StudentCreateView(CreateView):
 
   def get_success_url(self) -> str:
       return reverse("detail_student", args=(self.object.pk,))
+
+class CursusCallView(CreateView):
+  form_class = CursusCallForm
+  template_name = 'lycee/cursuscall/detail_cursuscall.html'
 
 
 class PresenceCreateView(CreateView):
@@ -60,7 +64,27 @@ def detail_student(request, student_id):
   return render(request, 'lycee/student/detail_student.html', context)
 
 
+def update_student(request, student_id):
+  student = Student.objects.get(pk=student_id)
+  form = None
+
+  if request.method == 'POST':
+      form = StudentForm(request.POST, instance=student)
+      if form.is_valid():
+          form.save()
+          return redirect('detail_student', student_id)
+  else:
+      form = StudentForm(instance=student)
+  
+  return render(request, 'lycee/student/update.html', {'form': form})
+
+
 def cursus_call(request, cursus_id):
+  if request.method == "POST":
+    print(request.POST)
+    cursus_call = request.POST.getlist('call')
+    print(cursus_call)
+
   result_list = Student.objects.filter(cursus=cursus_id)
 
   context = {'liste' : result_list}
