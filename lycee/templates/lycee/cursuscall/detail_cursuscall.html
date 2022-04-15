@@ -10,20 +10,24 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
-            <form method="POST">
-                <label for="date">Start date:</label>
-                <input type="date" id="date" name="date_cursuscall"
-                    value="2022-04-14"
-                    min="2021-09-01" max="2022-08-31">
-                <br>
-                {% for eleve in liste%}
-                <input type="checkbox" id="{{eleve.id}}" name="{{eleve.last_name}}">
-                <label for="{{eleve.id}}"></label>
-                {{eleve}}
-                <br>
-                {% endfor %}
-                <submit type="button" value="cursuscall_check"></submit>
-            </form>
+          <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+              <label for="date">Start date:</label>
+              <input type="date" id="date" name="date_cursuscall"
+                  value="2022-04-14"
+                  min="2021-09-01" max="2022-08-31">
+              <br>
+              {% for eleve in liste%}
+              <input type="checkbox" id="{{eleve.id}}" name="call">
+              <label for="{{eleve.id}}"></label>
+              {{eleve}}
+              <br>
+              {% endfor %}
+              <button class="button radius success right" type="submit">
+                Submit
+              </button>
+          </form>
         </div>
       </div>
     </div>
