@@ -1,5 +1,7 @@
 from audioop import reverse
+import json
 from django.shortcuts import redirect, render
+from datetime import datetime
 
 # Create your views here.
 
@@ -82,8 +84,23 @@ def update_student(request, student_id):
 def cursus_call(request, cursus_id):
   if request.method == "POST":
     print(request.POST)
-    cursus_call = request.POST.getlist('call')
-    print(cursus_call)
+    for student_id in request.POST.getlist('missing'):
+      print(student_id)
+
+      date = request.POST.getlist('date_cursuscall')
+      str_date = "".join(date)
+
+      new_missing = Presence(
+        reason="Missing",
+        isMissing=True,
+        date=str_date,
+        student=Student.objects.get(pk=student_id),
+        start_time="9:00",
+        end_time="17:00",
+      )
+
+      new_missing.save()
+    return redirect('detail_all_presence')
 
   result_list = Student.objects.filter(cursus=cursus_id)
 
@@ -98,6 +115,21 @@ def detail_presence(request, presence_id):
   context = {'liste' : result_list}
 
   return render(request, 'lycee/presence/detail_presence.html', context)
+
+
+def update_presence(request, presence_id):
+  presence = Presence.objects.get(pk=presence_id)
+  form = None
+
+  if request.method == 'POST':
+      form = PresenceForm(request.POST, instance=presence)
+      if form.is_valid():
+          form.save()
+          return redirect('detail_presence', presence_id)
+  else:
+      form = PresenceForm(instance=presence)
+  
+  return render(request, 'lycee/presence/update.html', {'form': form})
 
 
 def detail_all_presence(request):

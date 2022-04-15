@@ -28,5 +28,6 @@ urlpatterns = [
     path('lycee/cursuscall/<int:cursus_id>', views.cursus_call, name='cursus_call'),
     path('lycee/presence/', views.detail_all_presence, name='detail_all_presence'),
     path('lycee/presence/create', PresenceCreateView.as_view(), name='create_presence'),
+    path('lycee/presence/update/<int:presence_id>', views.update_presence, name='update_presence'),
     path('lycee/presence/<int:presence_id>', views.detail_presence, name='detail_presence'),
 ]
