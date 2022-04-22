@@ -21,6 +21,8 @@ class StudentForm(ModelForm):
 
 class PresenceForm(ModelForm):
 
+    student = forms.ModelChoiceField(queryset=Student.objects.order_by('last_name'))
+
     class Meta:
 
         model = Presence
