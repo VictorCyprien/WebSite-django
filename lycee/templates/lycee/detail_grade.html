@@ -1,9 +1,9 @@
 {% extends 'master.html' %}
 {% load static %}
 
-{% if liste %}
+{% if cursus %}
   {% block title %}
-    Detail of a cursus
+    Detail of a cursus {{cursus.name}}
   {% endblock %}
 
   {% block content %}

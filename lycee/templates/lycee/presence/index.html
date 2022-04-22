@@ -7,16 +7,19 @@
 
   {% block content %}
    <div class="container">
-     {% for presence in liste %}
-      <div class="row">
-        <div class="col-sm-12">
-          <a href="../student/{{presence.student.id}}">{{presence.student}}</a>
-          <button>
-            <a href="./{{presence.id}}">Details</a>
-          </button>
+
+
+        {% for presence in presence%}
+        <div class="row">
+          <div class="col-sm-12">
+            <a href="../student/{{presence.student.id}}">{{presence.student}}</a>
+            <button>
+              <a href="./{{presence.id}}">Details</a>
+            </button>
+          </div>
         </div>
-      </div>
-    {% endfor %}
+        {% endfor %}
+
      <div class="container">
        <div class="container">
         <div class="row">

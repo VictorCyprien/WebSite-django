@@ -51,9 +51,10 @@ def index(request):
 
 def detail_grade(request, cursus_id):
 
-  query = Student.objects.filter(cursus=cursus_id)
+  query = Student.objects.filter(cursus=cursus_id).order_by('last_name')
+  cursus = Cursus.objects.get(pk=cursus_id)
 
-  context = {'liste': query}
+  context = {'liste': query, 'cursus': cursus}
 
   return render(request, 'lycee/detail_grade.html', context)
 
@@ -102,7 +103,7 @@ def cursus_call(request, cursus_id):
       new_missing.save()
     return redirect('detail_all_presence')
 
-  result_list = Student.objects.filter(cursus=cursus_id)
+  result_list = Student.objects.filter(cursus=cursus_id).order_by('last_name')
 
   context = {'liste' : result_list}
 
@@ -134,8 +135,9 @@ def update_presence(request, presence_id):
 
 def detail_all_presence(request):
 
-  query = Presence.objects.all()
+  result_list = Presence.objects.all().order_by('student__last_name')
+  cursus = Cursus.objects.all()
 
-  context = {'liste': query}
+  context = {'cursus': cursus, 'presence': result_list}
 
   return render(request, 'lycee/presence/index.html', context)
