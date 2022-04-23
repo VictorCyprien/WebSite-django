@@ -9,10 +9,10 @@
    <div class="container">
 
 
-        {% for presence in presence%}
+        {% for presence in presence %}
         <div class="row">
           <div class="col-sm-12">
-            <a href="../student/{{presence.student.id}}">{{presence.student}}</a>
+            <a href="../student/{{presence.student.id}}">{{presence.student}} - {{presence.student.cursus}}</a>
             <button>
               <a href="./{{presence.id}}">Details</a>
             </button>
