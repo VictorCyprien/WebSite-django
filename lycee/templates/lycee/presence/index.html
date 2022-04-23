@@ -9,16 +9,23 @@
    <div class="container">
 
 
-        {% for presence in presence %}
-        <div class="row">
-          <div class="col-sm-12">
-            <a href="../student/{{presence.student.id}}">{{presence.student}} - {{presence.student.cursus}}</a>
-            <button>
-              <a href="./{{presence.id}}">Details</a>
-            </button>
+     {% for cursus in cursus %}
+      {{cursus.name}} :
+      {% for presence in presence %}
+        {% if presence.student.cursus|stringformat:'s' == cursus.name|stringformat:'s' %}
+          <div class="row">
+            <div class="col-sm-12">
+              <a href="../student/{{presence.student.id}}">{{presence.student}}</a>
+              <button>
+                <a href="./{{presence.id}}">Details</a>
+              </button>
+            </div>
           </div>
-        </div>
-        {% endfor %}
+        {% endif %}
+      {% endfor %}
+      <br>
+      <br>
+    {% endfor %}
 
      <div class="container">
        <div class="container">
