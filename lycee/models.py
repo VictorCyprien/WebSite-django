@@ -25,7 +25,7 @@ class Cursus(models.Model):
   )
   
   def __str__(self):
-    return '{} {}: {}'.format(self.name,self.year_from_bac,self.scholar_year)
+    return '{}'.format(self.name)
 
   class Meta:
     verbose_name_plural = 'Cursus'
