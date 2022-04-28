@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
@@ -112,6 +113,7 @@ class Presence(models.Model):
 
   date = models.DateField(
     verbose_name='Date of Student Missing',
+    default=datetime.now(),
     blank=False,
     null=False,
   )
