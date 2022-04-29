@@ -12,6 +12,10 @@ from django.template import loader
 from django.views.generic.edit import CreateView
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
+
 
 
 class StudentCreateView(CreateView):
@@ -38,10 +42,31 @@ class PresenceCreateView(CreateView):
       return reverse("detail_presence", args=(self.object.pk,))
 
 
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username = username, password = password)
+            login(request, user)
+            return redirect('index')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})
+
+
 def index(request):
+  template = loader.get_template("index.html")
+  return HttpResponse(template.render())
+
+
+@login_required
+def home(request):
   result_list = Cursus.objects.order_by('name')
 
-  template = loader.get_template("lycee/index.html")
+  template = loader.get_template("lycee/home.html")
 
   context = {
     "liste": result_list,
@@ -49,6 +74,8 @@ def index(request):
 
   return HttpResponse(template.render(context, request))
 
+
+@login_required
 def detail_grade(request, cursus_id):
 
   query = Student.objects.filter(cursus=cursus_id).order_by('last_name')
@@ -59,6 +86,7 @@ def detail_grade(request, cursus_id):
   return render(request, 'lycee/detail_grade.html', context)
 
 
+@login_required
 def detail_student(request, student_id):
   result_list = Student.objects.get(pk=student_id)
 
@@ -67,6 +95,7 @@ def detail_student(request, student_id):
   return render(request, 'lycee/student/detail_student.html', context)
 
 
+@login_required
 def update_student(request, student_id):
   student = Student.objects.get(pk=student_id)
   form = None
@@ -82,6 +111,7 @@ def update_student(request, student_id):
   return render(request, 'lycee/student/update.html', {'form': form})
 
 
+@login_required
 def cursus_call(request, cursus_id):
   if request.method == "POST":
     print(request.POST)
@@ -110,6 +140,7 @@ def cursus_call(request, cursus_id):
   return render(request, 'lycee/cursuscall/detail_cursuscall.html', context)
 
 
+@login_required
 def detail_presence(request, presence_id):
   result_list = Presence.objects.get(pk=presence_id)
 
@@ -118,6 +149,7 @@ def detail_presence(request, presence_id):
   return render(request, 'lycee/presence/detail_presence.html', context)
 
 
+@login_required
 def update_presence(request, presence_id):
   presence = Presence.objects.get(pk=presence_id)
   form = None
@@ -133,6 +165,7 @@ def update_presence(request, presence_id):
   return render(request, 'lycee/presence/update.html', {'form': form})
 
 
+@login_required
 def detail_all_presence(request):
 
   result_list = Presence.objects.all().order_by('student__last_name')
