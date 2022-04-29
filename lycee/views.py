@@ -7,7 +7,7 @@ from datetime import datetime
 
 from django.http import HttpResponse
 from .models import Cursus, Student, Presence
-from .forms import CursusCallForm, StudentForm, PresenceForm
+from .forms import CursusCallForm, RegisterForm, StudentForm, PresenceForm
 from django.template import loader
 from django.views.generic.edit import CreateView
 from django.urls import reverse
@@ -15,6 +15,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -44,7 +45,7 @@ class PresenceCreateView(CreateView):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -53,11 +54,15 @@ def register(request):
             login(request, user)
             return redirect('index')
     else:
-        form = UserCreationForm()
+        form = RegisterForm()
     return render(request, 'registration/register.html', {'form': form})
 
 
 def index(request):
+
+  if request.user.is_authenticated:
+    return redirect('/lycee')
+
   template = loader.get_template("index.html")
   return HttpResponse(template.render())
 
