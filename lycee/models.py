@@ -30,6 +30,9 @@ class Cursus(models.Model):
 
   class Meta:
     verbose_name_plural = 'Cursus'
+    permissions = (
+      ("check_cursus", "Can view the cursus"),
+    )
 
 
 class Student(models.Model):
@@ -91,6 +94,13 @@ class Student(models.Model):
   def __str__(self):
     return f"{self.last_name} {self.first_name}"
 
+  class Meta:
+    permissions = (
+      ("check_student", "Can view the student"),
+      ("create_student", "Can create a student"),
+      ("update_student", "Can update a student"),
+    )
+
 
 
 class Presence(models.Model):
@@ -133,3 +143,10 @@ class Presence(models.Model):
   end_time = models.TimeField(
     verbose_name="end_time",
   )
+
+  class Meta:
+    permissions = (
+      ("check_presence", "Can view a presence"),
+      ("create_presence", "Can create a presence"),
+      ("update_presence", "Can update a presence"),
+    )
