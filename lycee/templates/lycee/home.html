@@ -7,7 +7,7 @@
 
   {% block content %}
    <div class="container">
-     <p>Bonjour {{ request.user.username }} !</p>
+     <p>Bonjour {{ request.user.first_name }} {{ request.user.last_name }} !</p>
      <button class="button radius alert left" type="cancel">
       <a href={% url 'logout' %}>Déconnexion</a>
      </button>
