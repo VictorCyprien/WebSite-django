@@ -121,3 +121,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 ALLOWED_HOSTS = ['*']
 X_FRAME_OPTIONS = '*'
+
+#LOGIN 
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/lycee/'
+LOGOUT_REDIRECT_URL = '/'
