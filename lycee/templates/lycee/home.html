@@ -7,6 +7,11 @@
 
   {% block content %}
    <div class="container">
+     <p>Bonjour {{ request.user.username }} !</p>
+     <button class="button radius alert left" type="cancel">
+      <a href={% url 'logout' %}>Déconnexion</a>
+     </button>
+     
      {% for cursus in liste %}
       <div class="row">
         <div class="col-sm-12">
