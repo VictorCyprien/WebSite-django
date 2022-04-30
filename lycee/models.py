@@ -153,6 +153,15 @@ class Presence(models.Model):
 
 
 class Matiere(models.Model):
+  name = models.CharField(
+    verbose_name="name",
+    help_text="Name of the Matiere",
+    blank=False,
+    null=False, # pas de champ null (a conjuguer avec default
+    default="",
+    max_length=255, # taille maximale du champ
+  )
+
   start_time = models.DateTimeField(
     verbose_name="Start time"
   )
