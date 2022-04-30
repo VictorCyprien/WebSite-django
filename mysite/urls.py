@@ -29,6 +29,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('lycee/', views.home, name='home'),
     path('lycee/<int:cursus_id>', views.detail_grade, name='detail_grade'),
+    path('lycee/teacher/<int:teacher_id>', views.detail_teacher, name='detail_teacher'),
     path('lycee/student/<int:student_id>', views.detail_student, name='detail_student'),
     path('lycee/student/create', login_required(StudentCreateView.as_view()), name='create_student'),
     path('lycee/student/update/<int:student_id>', login_required(views.update_student), name='update_student'),

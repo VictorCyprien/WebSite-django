@@ -6,7 +6,7 @@ from datetime import datetime
 # Create your views here.
 
 from django.http import HttpResponse
-from .models import Cursus, Student, Presence
+from .models import Cursus, Student, Presence, Teacher
 from .forms import CursusCallForm, RegisterForm, StudentForm, PresenceForm
 from django.template import loader
 from django.views.generic.edit import CreateView
@@ -78,6 +78,15 @@ def home(request):
   }
 
   return HttpResponse(template.render(context, request))
+
+
+@login_required
+def detail_teacher(request, teacher_id):
+
+  query = Teacher.objects.get(pk=teacher_id)
+  context = {'teacher': query}
+
+  return render(request, 'lycee/detail_teacher.html', context)
 
 
 @login_required
