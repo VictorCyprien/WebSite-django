@@ -1,0 +1,21 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% if liste %}
+  {% block title %}
+    Detail of the teacher : {{teacher.name}}
+  {% endblock %}
+
+  {% block content %}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <li>Name : {{teacher.name}}</li>
+          <li>Matiere : {{teacher.matiere.name}}</li>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+{% else %}
+  <p>No teacher to show.</p>
+{% endif %}
