@@ -170,6 +170,15 @@ class Matiere(models.Model):
 
 
 class Teacher(models.Model):
+  name = models.CharField(
+    verbose_name="name",
+    help_text="Name of the Teacher",
+    blank=False,
+    null=False, # pas de champ null (a conjuguer avec default
+    default="",
+    max_length=255, # taille maximale du champ
+  )
+
   matiere = models.ForeignKey(
     Matiere,
     related_name="Matiere",
