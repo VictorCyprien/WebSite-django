@@ -150,3 +150,29 @@ class Presence(models.Model):
       ("create_presence", "Can create a presence"),
       ("update_presence", "Can update a presence"),
     )
+
+
+class Matiere(models.Model):
+  start_time = models.DateTimeField(
+    verbose_name="Start time"
+  )
+
+  end_time = models.DateTimeField(
+    verbose_name="End time"
+  )
+
+  cursus = models.ForeignKey(
+    Cursus,
+    related_name="Cursus",
+    on_delete=models.CASCADE, # necessaire selon la version de Django
+    null=False
+  )
+
+
+class Teacher(models.Model):
+  matiere = models.ForeignKey(
+    Matiere,
+    related_name="Matiere",
+    on_delete=models.CASCADE, # necessaire selon la version de Django
+    null=False
+  )
