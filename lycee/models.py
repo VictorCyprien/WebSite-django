@@ -44,6 +44,7 @@ class Student(models.Model):
 
   birth_date = models.DateField(
     verbose_name='date of birth',
+    help_text="YYYY-MM-DD",
     blank=False,
     null=False
   )

@@ -36,7 +36,7 @@
           </div>
           {% if form.non_field_errors %} {% for error in form.non_field_errors %}
           <p style="font-size: 13px;">
-            {{ error|escape }}
+            L'identifiant ou le mot de passe est incorrect !
           </p>
           {% endfor %} {% endif %}
           <button type="submit" class="btn btn-primary">Se connecter</button>

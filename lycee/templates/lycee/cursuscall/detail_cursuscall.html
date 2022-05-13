@@ -12,10 +12,10 @@
         <div class="col-sm-12">
           <form method="POST">
             {% csrf_token %}
+            {% now "d/m/Y" as test %}
               <label for="date">Start date:</label>
               <input type="date" id="date" name="date_cursuscall"
-                  value="2022-04-14"
-                  min="2021-09-01" max="2022-08-31">
+                  value="2022-04-14">
               <br>
               {% for eleve in liste%}
               <input type="checkbox" id="{{eleve.id}}" name="missing" value="{{eleve.id}}">
