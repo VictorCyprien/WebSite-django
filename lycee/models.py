@@ -165,11 +165,11 @@ class Matiere(models.Model):
     max_length=255, # taille maximale du champ
   )
 
-  start_time = models.DateTimeField(['%Y-%m-%d %H:%M:%S'],
+  start_time = models.DateTimeField(
     verbose_name="Start time"
   )
 
-  end_time = models.DateTimeField(['%Y-%m-%d %H:%M:%S'],
+  end_time = models.DateTimeField(
     verbose_name="End time"
   )
 
