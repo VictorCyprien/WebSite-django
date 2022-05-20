@@ -139,10 +139,12 @@ class Presence(models.Model):
 
   start_time = models.TimeField(
     verbose_name="start_time",
+    help_text="HH:MM",
   )
 
   end_time = models.TimeField(
     verbose_name="end_time",
+    help_text="HH:MM",
   )
 
   class Meta:
@@ -163,11 +165,11 @@ class Matiere(models.Model):
     max_length=255, # taille maximale du champ
   )
 
-  start_time = models.DateTimeField(
+  start_time = models.DateTimeField(['%Y-%m-%d %H:%M:%S'],
     verbose_name="Start time"
   )
 
-  end_time = models.DateTimeField(
+  end_time = models.DateTimeField(['%Y-%m-%d %H:%M:%S'],
     verbose_name="End time"
   )
 
