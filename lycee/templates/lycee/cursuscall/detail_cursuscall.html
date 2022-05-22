@@ -12,7 +12,6 @@
         <div class="col-sm-12">
           <form method="POST">
             {% csrf_token %}
-            {% now "d/m/Y" as test %}
               <label for="date">Start date:</label>
               <input type="date" id="date" name="date_cursuscall"
                   value="2022-04-14">
